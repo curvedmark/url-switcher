@@ -1,8 +1,8 @@
-![URL Switcher logo](icon48.png)
+![URL Switcher logo](icon128.png)
 
 # URL Switcher
 
-A Google Chrome extension that help navigate through website URL hierarchy. Inspired by Safari.
+A Google Chrome extension that helps navigate through website URL hierarchy. Inspired by Safari.
 
 ## Screenshots
 
