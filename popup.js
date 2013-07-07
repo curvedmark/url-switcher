@@ -10,9 +10,19 @@ chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
 	output.innerHTML = html;
 
 	output.onclick = function (event) {
-		if (event.ctrlKey || event.metaKey || event.shiftKey) return;
 		var a = event.target;
-		chrome.tabs.update(tab.id, { url: a.href });
+
+		// chrome opens web link with modifier keys pressed in popup automatically
+		if (a.protocol !== 'file:'&& (event.ctrlKey || event.metaKey || event.shiftKey)) return;
+
+		if (event.ctrlKey || event.metaKey) {
+			chrome.tabs.create({ url: a.href, active: event.shiftKey });
+		} else if (event.shiftKey) {
+			chrome.windows.create({ url: a.href });
+		} else {
+			chrome.tabs.update(tab.id, { url: a.href });
+		}
+
 		window.close();
 	};
 });

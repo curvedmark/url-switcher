@@ -15,8 +15,9 @@ Url.prototype.isHierarchic = function () {
 	case 'http:':
 	case 'https:':
 	case 'ftp:':
-	case 'file:':
 		return !this.isSimple();
+	case 'file:':
+		return this.pathname !== '/';
 	}
 	return false;
 };
@@ -45,7 +46,7 @@ Url.prototype.toShortString = function () {
 	value += this.hostname;
 	if (this.port) value += ':' + this.port;
 	var remain = this.pathname + this.search + this.hash;
-	if (remain !== '/') value += remain;
+	if (this.protocol === 'file:' || remain !== '/') value += remain;
 
 	return decodeURI(value);
 };
